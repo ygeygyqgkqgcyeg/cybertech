@@ -25,7 +25,7 @@ that are not requested in the current prompt.
 
 Screens (Expo Router, in `src/app/`):
 
-1. `sign-in` - Clerk sign-in with Google.
+1. `sign-in` - Clerk sign-up with email + password and an emailed verification code.
 2. `home` - short welcome and a "Start" button.
 3. `chat` - the hero screen. The AI-guided self-check.
 4. `result` - plain-language summary and a suggested next step.
@@ -102,7 +102,8 @@ This app is used by young learners and touches a sensitive topic.
 ## Authentication
 
 - Authentication will use Clerk.
-- Google sign-in will be configured through Clerk.
+- Sign-up uses email + password with an email verification code (enable
+  "Email verification code" in the Clerk dashboard). No social/Google login.
 - Keep authentication state and protected routes handled through the app's
   existing Expo Router structure (route groups, redirect signed-out users to
   `sign-in`).

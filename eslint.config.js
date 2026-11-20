@@ -10,4 +10,4 @@ for (const config of expo) {
   }
 }
 
-module.exports = defineConfig([expo, { ignores: ['dist/*'], rules: importRulesOff }]);
+module.exports = defineConfig([expo, { ignores: ['dist/*', 'src/generated/*'] }, { rules: importRulesOff }]);
