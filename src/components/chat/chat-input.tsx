@@ -3,12 +3,14 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { colors, fontSizes, radius, spacing, touchTarget } from '@/theme';
 
-export function ChatInput({ onSend }: { onSend: (text: string) => void }) {
+type Props = { onSend: (text: string) => void; disabled?: boolean };
+
+export function ChatInput({ onSend, disabled }: Props) {
   const [text, setText] = useState('');
 
   const send = () => {
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed || disabled) return;
     onSend(trimmed);
     setText('');
   };

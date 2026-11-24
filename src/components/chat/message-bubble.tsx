@@ -1,4 +1,5 @@
 import { StyleSheet, Text } from 'react-native';
+import Markdown from 'react-native-markdown-display';
 import Animated, { FadeInDown, ReduceMotion } from 'react-native-reanimated';
 
 import { colors, fontSizes, motion, radius, spacing } from '@/theme';
@@ -14,10 +15,23 @@ export function MessageBubble({ message }: { message: Message }) {
       accessible
       accessibilityLabel={`${isUser ? 'You' : 'Assistant'}: ${message.text}`}
       style={[styles.bubble, isUser ? styles.user : styles.assistant]}>
-      <Text style={[styles.text, isUser && styles.userText]}>{message.text}</Text>
+      {isUser ? (
+        <Text style={[styles.text, styles.userText]}>{message.text}</Text>
+      ) : (
+        <Markdown style={markdownStyles}>{message.text}</Markdown>
+      )}
     </Animated.View>
   );
 }
+
+// Assistant replies can contain **bold**, lists, etc. User text stays plain.
+const markdownStyles = StyleSheet.create({
+  body: { color: colors.text, fontSize: fontSizes.md },
+  paragraph: { marginTop: 0, marginBottom: spacing.xs },
+  strong: { fontWeight: '700' },
+  bullet_list: { marginBottom: spacing.xs },
+  ordered_list: { marginBottom: spacing.xs },
+});
 
 const styles = StyleSheet.create({
   bubble: {
